@@ -3,6 +3,8 @@
 #include <zmq.hpp>
 #include <memory>
 
+namespace event {
+
 class EventBusSubscriber
 {
   class Listener {
@@ -14,11 +16,15 @@ private:
   const char * m_url;
   zmq::context_t m_context;
   zmq::socket_t m_subscriber;
+  Listener * m_listener;
+
+  void listen();
 
 public:
-  EventBusSubscriber(const char * url);
-  virtual ~EventBusSubscriber() = default;
+  EventBusSubscriber(const char * url, Listener * listener);
+  virtual ~EventBusSubscriber();
 
-  void listen(Listener * listener);
 
 };
+
+}

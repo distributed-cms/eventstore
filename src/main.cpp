@@ -4,11 +4,13 @@
 
 #include <grpc/grpc.h>
 
-//#include "EventBusSubscriber.h"
 #include "Store.h"
+#include "ServerRunner.h"
+#include "EventStoreImpl.h"
 
 using namespace std;
 using namespace event;
+using namespace common;
 
 constexpr int DEFAULT_PORT = 10001;
 
@@ -30,7 +32,8 @@ int main(int argc, char** argv)
 	const string address = get_address(argc, argv);
 
 	grpc_init();
-
+	EventStoreImpl event_store_service {};
+	ServerRunner server_runner{get_address(argc, argv) , {&event_store_service}};
 
 	grpc_shutdown();
 

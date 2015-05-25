@@ -9,20 +9,23 @@
 
 namespace event {
 
-using namespace grpc;
+
+using grpc::ServerContext;
+using grpc::Status;
+using grpc::ServerWriter;
+
+using namespace common;
 
 EventStoreImpl::EventStoreImpl() {
-	// TODO Auto-generated constructor stub
-
 }
 
 EventStoreImpl::~EventStoreImpl() {
-	// TODO Auto-generated destructor stub
 }
 
-Status get(ServerContext* context, const Uuid* request, ServerWriter<Event>* writer)
+Status EventStoreImpl::get_events(ServerContext* context, const Uuid* request, ServerWriter<Event>* writer)
 {
-	return StatusCode::OK;
+	return Status::OK;
 }
+
 
 } /* namespace event */

@@ -11,7 +11,7 @@
 #include <grpc++/server_builder.h>
 #include <vector>
 
-namespace content {
+namespace common {
 	class ServerRunner {
 	public:
 		ServerRunner(const std::string & address, const std::vector<grpc::SynchronousService * > & services);

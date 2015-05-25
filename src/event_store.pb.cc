@@ -55,11 +55,11 @@ void protobuf_AddDesc_event_5fstore_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::protobuf_AddDesc_base_2eproto();
+  ::common::protobuf_AddDesc_base_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\021event_store.proto\022\005event\032\nbase.proto2&"
-    "\n\nEventStore\022\030\n\003get\022\005.Uuid\032\006.Event\"\0000\001B\003"
-    "\370\001\001b\006proto3", 91);
+    "\n\021event_store.proto\022\005event\032\nbase.proto2;"
+    "\n\nEventStore\022-\n\nget_events\022\014.common.Uuid"
+    "\032\r.common.Event\"\0000\001B\003\370\001\001b\006proto3", 112);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "event_store.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_event_5fstore_2eproto);

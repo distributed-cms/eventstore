@@ -18,5 +18,9 @@ class RpcService;
 class ServerContext;
 }  // namespace grpc
 
+namespace common {
+
+}  // namespace common
+
 
 #endif  // GRPC_base_2eproto__INCLUDED

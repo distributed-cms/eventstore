@@ -30,6 +30,8 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
+namespace common {
+
 // Internal implementation detail -- do not call these.
 void protobuf_AddDesc_base_2eproto();
 void protobuf_AssignDesc_base_2eproto();
@@ -166,7 +168,7 @@ class Uuid : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 most_significant_bits() const;
   inline void set_most_significant_bits(::google::protobuf::int64 value);
 
-  // @@protoc_insertion_point(class_scope:Uuid)
+  // @@protoc_insertion_point(class_scope:common.Uuid)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -252,17 +254,17 @@ class Event : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .Uuid aggregate_id = 1;
+  // optional .common.Uuid aggregate_id = 1;
   inline bool has_aggregate_id() const;
   inline void clear_aggregate_id();
   static const int kAggregateIdFieldNumber = 1;
-  inline const ::Uuid& aggregate_id() const;
-  inline ::Uuid* mutable_aggregate_id();
-  inline ::Uuid* release_aggregate_id();
-  inline void set_allocated_aggregate_id(::Uuid* aggregate_id);
-  inline ::Uuid* unsafe_arena_release_aggregate_id();
+  inline const ::common::Uuid& aggregate_id() const;
+  inline ::common::Uuid* mutable_aggregate_id();
+  inline ::common::Uuid* release_aggregate_id();
+  inline void set_allocated_aggregate_id(::common::Uuid* aggregate_id);
+  inline ::common::Uuid* unsafe_arena_release_aggregate_id();
   inline void unsafe_arena_set_allocated_aggregate_id(
-      ::Uuid* aggregate_id);
+      ::common::Uuid* aggregate_id);
 
   // optional string serialized_data = 2;
   inline void clear_serialized_data();
@@ -278,7 +280,7 @@ class Event : public ::google::protobuf::Message {
   inline void unsafe_arena_set_allocated_serialized_data(
       ::std::string* serialized_data);
 
-  // @@protoc_insertion_point(class_scope:Event)
+  // @@protoc_insertion_point(class_scope:common.Event)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -286,7 +288,7 @@ class Event : public ::google::protobuf::Message {
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   bool _is_default_instance_;
-  ::Uuid* aggregate_id_;
+  ::common::Uuid* aggregate_id_;
   ::google::protobuf::internal::ArenaStringPtr serialized_data_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_base_2eproto();
@@ -308,13 +310,13 @@ inline void Uuid::clear_least_significant_bits() {
   least_significant_bits_ = GOOGLE_LONGLONG(0);
 }
 inline ::google::protobuf::int64 Uuid::least_significant_bits() const {
-  // @@protoc_insertion_point(field_get:Uuid.least_significant_bits)
+  // @@protoc_insertion_point(field_get:common.Uuid.least_significant_bits)
   return least_significant_bits_;
 }
 inline void Uuid::set_least_significant_bits(::google::protobuf::int64 value) {
   
   least_significant_bits_ = value;
-  // @@protoc_insertion_point(field_set:Uuid.least_significant_bits)
+  // @@protoc_insertion_point(field_set:common.Uuid.least_significant_bits)
 }
 
 // optional sint64 most_significant_bits = 2;
@@ -322,20 +324,20 @@ inline void Uuid::clear_most_significant_bits() {
   most_significant_bits_ = GOOGLE_LONGLONG(0);
 }
 inline ::google::protobuf::int64 Uuid::most_significant_bits() const {
-  // @@protoc_insertion_point(field_get:Uuid.most_significant_bits)
+  // @@protoc_insertion_point(field_get:common.Uuid.most_significant_bits)
   return most_significant_bits_;
 }
 inline void Uuid::set_most_significant_bits(::google::protobuf::int64 value) {
   
   most_significant_bits_ = value;
-  // @@protoc_insertion_point(field_set:Uuid.most_significant_bits)
+  // @@protoc_insertion_point(field_set:common.Uuid.most_significant_bits)
 }
 
 // -------------------------------------------------------------------
 
 // Event
 
-// optional .Uuid aggregate_id = 1;
+// optional .common.Uuid aggregate_id = 1;
 inline bool Event::has_aggregate_id() const {
   return !_is_default_instance_ && aggregate_id_ != NULL;
 }
@@ -343,43 +345,43 @@ inline void Event::clear_aggregate_id() {
   if (aggregate_id_ != NULL) delete aggregate_id_;
   aggregate_id_ = NULL;
 }
-inline const ::Uuid& Event::aggregate_id() const {
-  // @@protoc_insertion_point(field_get:Event.aggregate_id)
+inline const ::common::Uuid& Event::aggregate_id() const {
+  // @@protoc_insertion_point(field_get:common.Event.aggregate_id)
   return aggregate_id_ != NULL ? *aggregate_id_ : *default_instance_->aggregate_id_;
 }
-inline ::Uuid* Event::mutable_aggregate_id() {
+inline ::common::Uuid* Event::mutable_aggregate_id() {
   
   if (aggregate_id_ == NULL) {
-    aggregate_id_ = ::google::protobuf::Arena::CreateMessage< ::Uuid >(
+    aggregate_id_ = ::google::protobuf::Arena::CreateMessage< ::common::Uuid >(
         GetArenaNoVirtual());
   }
-  // @@protoc_insertion_point(field_mutable:Event.aggregate_id)
+  // @@protoc_insertion_point(field_mutable:common.Event.aggregate_id)
   return aggregate_id_;
 }
-inline ::Uuid* Event::release_aggregate_id() {
+inline ::common::Uuid* Event::release_aggregate_id() {
   
   if (GetArenaNoVirtual() != NULL) {
     if (aggregate_id_ == NULL) {
       return NULL;
     } else {
-      ::Uuid* temp = new ::Uuid;
+      ::common::Uuid* temp = new ::common::Uuid;
       temp->MergeFrom(*aggregate_id_);
       aggregate_id_ = NULL;
       return temp;
     }
   } else {
-    ::Uuid* temp = aggregate_id_;
+    ::common::Uuid* temp = aggregate_id_;
     aggregate_id_ = NULL;
     return temp;
   }
 }
-inline ::Uuid* Event::unsafe_arena_release_aggregate_id() {
+inline ::common::Uuid* Event::unsafe_arena_release_aggregate_id() {
   
-  ::Uuid* temp = aggregate_id_;
+  ::common::Uuid* temp = aggregate_id_;
   aggregate_id_ = NULL;
   return temp;
 }
-inline void Event::set_allocated_aggregate_id(::Uuid* aggregate_id) {
+inline void Event::set_allocated_aggregate_id(::common::Uuid* aggregate_id) {
   if (GetArenaNoVirtual() == NULL) {
     delete aggregate_id_;
   }
@@ -389,8 +391,8 @@ inline void Event::set_allocated_aggregate_id(::Uuid* aggregate_id) {
       GetArenaNoVirtual()->Own(aggregate_id);
     } else if (GetArenaNoVirtual() !=
                ::google::protobuf::Arena::GetArena(aggregate_id)) {
-      ::Uuid* new_aggregate_id = 
-            ::google::protobuf::Arena::CreateMessage< ::Uuid >(
+      ::common::Uuid* new_aggregate_id = 
+            ::google::protobuf::Arena::CreateMessage< ::common::Uuid >(
             GetArenaNoVirtual());
       new_aggregate_id->CopyFrom(*aggregate_id);
       aggregate_id = new_aggregate_id;
@@ -402,10 +404,10 @@ inline void Event::set_allocated_aggregate_id(::Uuid* aggregate_id) {
   } else {
     
   }
-  // @@protoc_insertion_point(field_set_allocated:Event.aggregate_id)
+  // @@protoc_insertion_point(field_set_allocated:common.Event.aggregate_id)
 }
 inline void Event::unsafe_arena_set_allocated_aggregate_id(
-    ::Uuid* aggregate_id) {
+    ::common::Uuid* aggregate_id) {
   if (GetArenaNoVirtual() == NULL) {
     delete aggregate_id_;
   }
@@ -415,7 +417,7 @@ inline void Event::unsafe_arena_set_allocated_aggregate_id(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Event.aggregate_id)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:common.Event.aggregate_id)
 }
 
 // optional string serialized_data = 2;
@@ -423,30 +425,30 @@ inline void Event::clear_serialized_data() {
   serialized_data_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 inline const ::std::string& Event::serialized_data() const {
-  // @@protoc_insertion_point(field_get:Event.serialized_data)
+  // @@protoc_insertion_point(field_get:common.Event.serialized_data)
   return serialized_data_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void Event::set_serialized_data(const ::std::string& value) {
   
   serialized_data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set:Event.serialized_data)
+  // @@protoc_insertion_point(field_set:common.Event.serialized_data)
 }
 inline void Event::set_serialized_data(const char* value) {
   
   serialized_data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
               GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_char:Event.serialized_data)
+  // @@protoc_insertion_point(field_set_char:common.Event.serialized_data)
 }
 inline void Event::set_serialized_data(const char* value,
     size_t size) {
   
   serialized_data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
       reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_pointer:Event.serialized_data)
+  // @@protoc_insertion_point(field_set_pointer:common.Event.serialized_data)
 }
 inline ::std::string* Event::mutable_serialized_data() {
   
-  // @@protoc_insertion_point(field_mutable:Event.serialized_data)
+  // @@protoc_insertion_point(field_mutable:common.Event.serialized_data)
   return serialized_data_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 inline ::std::string* Event::release_serialized_data() {
@@ -467,7 +469,7 @@ inline void Event::set_allocated_serialized_data(::std::string* serialized_data)
   }
   serialized_data_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), serialized_data,
       GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:Event.serialized_data)
+  // @@protoc_insertion_point(field_set_allocated:common.Event.serialized_data)
 }
 inline void Event::unsafe_arena_set_allocated_serialized_data(
     ::std::string* serialized_data) {
@@ -480,25 +482,27 @@ inline void Event::unsafe_arena_set_allocated_serialized_data(
   
   serialized_data_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       serialized_data, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:Event.serialized_data)
+  // @@protoc_insertion_point(field_set_allocated:common.Event.serialized_data)
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
+}  // namespace common
+
 #ifndef SWIG
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::Format> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::common::Format> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Format>() {
-  return ::Format_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::common::Format>() {
+  return ::common::Format_descriptor();
 }
-template <> struct is_proto_enum< ::Level> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::common::Level> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Level>() {
-  return ::Level_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::common::Level>() {
+  return ::common::Level_descriptor();
 }
 
 }  // namespace protobuf

@@ -1,6 +1,7 @@
 
 syntax = "proto3";
 
+package common;
 
 option cc_enable_arenas = true;
 

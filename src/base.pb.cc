@@ -16,6 +16,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace common {
+
 namespace {
 
 const ::google::protobuf::Descriptor* Uuid_descriptor_ = NULL;
@@ -104,13 +106,14 @@ void protobuf_AddDesc_base_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nbase.proto\"E\n\004Uuid\022\036\n\026least_significan"
-    "t_bits\030\001 \001(\022\022\035\n\025most_significant_bits\030\002 "
-    "\001(\022\"=\n\005Event\022\033\n\014aggregate_id\030\001 \001(\0132\005.Uui"
-    "d\022\027\n\017serialized_data\030\002 \001(\t*\?\n\006Format\022\010\n\004"
-    "HTML\020\000\022\006\n\002MD\020\001\022\007\n\003RST\020\002\022\007\n\003SRC\020\003\022\007\n\003IMG\020"
-    "\004\022\010\n\004GIST\020\005*1\n\005Level\022\t\n\005DEBUG\020\000\022\010\n\004INFO\020"
-    "\001\022\010\n\004WARN\020\002\022\t\n\005ERROR\020\003B\003\370\001\001b\006proto3", 275);
+    "\n\nbase.proto\022\006common\"E\n\004Uuid\022\036\n\026least_si"
+    "gnificant_bits\030\001 \001(\022\022\035\n\025most_significant"
+    "_bits\030\002 \001(\022\"D\n\005Event\022\"\n\014aggregate_id\030\001 \001"
+    "(\0132\014.common.Uuid\022\027\n\017serialized_data\030\002 \001("
+    "\t*\?\n\006Format\022\010\n\004HTML\020\000\022\006\n\002MD\020\001\022\007\n\003RST\020\002\022\007"
+    "\n\003SRC\020\003\022\007\n\003IMG\020\004\022\010\n\004GIST\020\005*1\n\005Level\022\t\n\005D"
+    "EBUG\020\000\022\010\n\004INFO\020\001\022\010\n\004WARN\020\002\022\t\n\005ERROR\020\003B\003\370"
+    "\001\001b\006proto3", 290);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "base.proto", &protobuf_RegisterTypes);
   Uuid::default_instance_ = new Uuid();
@@ -181,7 +184,7 @@ const int Uuid::kMostSignificantBitsFieldNumber;
 Uuid::Uuid()
   : ::google::protobuf::Message() , _internal_metadata_(NULL)  {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Uuid)
+  // @@protoc_insertion_point(constructor:common.Uuid)
 }
 
 Uuid::Uuid(::google::protobuf::Arena* arena)
@@ -189,7 +192,7 @@ Uuid::Uuid(::google::protobuf::Arena* arena)
   _internal_metadata_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:Uuid)
+  // @@protoc_insertion_point(arena_constructor:common.Uuid)
 }
 
 void Uuid::InitAsDefaultInstance() {
@@ -201,7 +204,7 @@ Uuid::Uuid(const Uuid& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Uuid)
+  // @@protoc_insertion_point(copy_constructor:common.Uuid)
 }
 
 void Uuid::SharedCtor() {
@@ -212,7 +215,7 @@ void Uuid::SharedCtor() {
 }
 
 Uuid::~Uuid() {
-  // @@protoc_insertion_point(destructor:Uuid)
+  // @@protoc_insertion_point(destructor:common.Uuid)
   SharedDtor();
 }
 
@@ -274,7 +277,7 @@ bool Uuid::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Uuid)
+  // @@protoc_insertion_point(parse_start:common.Uuid)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -322,17 +325,17 @@ bool Uuid::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Uuid)
+  // @@protoc_insertion_point(parse_success:common.Uuid)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Uuid)
+  // @@protoc_insertion_point(parse_failure:common.Uuid)
   return false;
 #undef DO_
 }
 
 void Uuid::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Uuid)
+  // @@protoc_insertion_point(serialize_start:common.Uuid)
   // optional sint64 least_significant_bits = 1;
   if (this->least_significant_bits() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteSInt64(1, this->least_significant_bits(), output);
@@ -343,12 +346,12 @@ void Uuid::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteSInt64(2, this->most_significant_bits(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:Uuid)
+  // @@protoc_insertion_point(serialize_end:common.Uuid)
 }
 
 ::google::protobuf::uint8* Uuid::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Uuid)
+  // @@protoc_insertion_point(serialize_to_array_start:common.Uuid)
   // optional sint64 least_significant_bits = 1;
   if (this->least_significant_bits() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt64ToArray(1, this->least_significant_bits(), target);
@@ -359,7 +362,7 @@ void Uuid::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteSInt64ToArray(2, this->most_significant_bits(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:Uuid)
+  // @@protoc_insertion_point(serialize_to_array_end:common.Uuid)
   return target;
 }
 
@@ -467,7 +470,7 @@ const int Event::kSerializedDataFieldNumber;
 Event::Event()
   : ::google::protobuf::Message() , _internal_metadata_(NULL)  {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Event)
+  // @@protoc_insertion_point(constructor:common.Event)
 }
 
 Event::Event(::google::protobuf::Arena* arena)
@@ -475,12 +478,12 @@ Event::Event(::google::protobuf::Arena* arena)
   _internal_metadata_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:Event)
+  // @@protoc_insertion_point(arena_constructor:common.Event)
 }
 
 void Event::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  aggregate_id_ = const_cast< ::Uuid*>(&::Uuid::default_instance());
+  aggregate_id_ = const_cast< ::common::Uuid*>(&::common::Uuid::default_instance());
 }
 
 Event::Event(const Event& from)
@@ -488,7 +491,7 @@ Event::Event(const Event& from)
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:Event)
+  // @@protoc_insertion_point(copy_constructor:common.Event)
 }
 
 void Event::SharedCtor() {
@@ -500,7 +503,7 @@ void Event::SharedCtor() {
 }
 
 Event::~Event() {
-  // @@protoc_insertion_point(destructor:Event)
+  // @@protoc_insertion_point(destructor:common.Event)
   SharedDtor();
 }
 
@@ -552,13 +555,13 @@ bool Event::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Event)
+  // @@protoc_insertion_point(parse_start:common.Event)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .Uuid aggregate_id = 1;
+      // optional .common.Uuid aggregate_id = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -579,7 +582,7 @@ bool Event::MergePartialFromCodedStream(
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->serialized_data().data(), this->serialized_data().length(),
             ::google::protobuf::internal::WireFormat::PARSE,
-            "Event.serialized_data");
+            "common.Event.serialized_data");
         } else {
           goto handle_unusual;
         }
@@ -600,18 +603,18 @@ bool Event::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Event)
+  // @@protoc_insertion_point(parse_success:common.Event)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Event)
+  // @@protoc_insertion_point(parse_failure:common.Event)
   return false;
 #undef DO_
 }
 
 void Event::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Event)
-  // optional .Uuid aggregate_id = 1;
+  // @@protoc_insertion_point(serialize_start:common.Event)
+  // optional .common.Uuid aggregate_id = 1;
   if (this->has_aggregate_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, *this->aggregate_id_, output);
@@ -622,18 +625,18 @@ void Event::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->serialized_data().data(), this->serialized_data().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "Event.serialized_data");
+      "common.Event.serialized_data");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->serialized_data(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:Event)
+  // @@protoc_insertion_point(serialize_end:common.Event)
 }
 
 ::google::protobuf::uint8* Event::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Event)
-  // optional .Uuid aggregate_id = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:common.Event)
+  // optional .common.Uuid aggregate_id = 1;
   if (this->has_aggregate_id()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -645,20 +648,20 @@ void Event::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->serialized_data().data(), this->serialized_data().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "Event.serialized_data");
+      "common.Event.serialized_data");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->serialized_data(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:Event)
+  // @@protoc_insertion_point(serialize_to_array_end:common.Event)
   return target;
 }
 
 int Event::ByteSize() const {
   int total_size = 0;
 
-  // optional .Uuid aggregate_id = 1;
+  // optional .common.Uuid aggregate_id = 1;
   if (this->has_aggregate_id()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -693,7 +696,7 @@ void Event::MergeFrom(const ::google::protobuf::Message& from) {
 void Event::MergeFrom(const Event& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_aggregate_id()) {
-    mutable_aggregate_id()->::Uuid::MergeFrom(from.aggregate_id());
+    mutable_aggregate_id()->::common::Uuid::MergeFrom(from.aggregate_id());
   }
   if (from.serialized_data().size() > 0) {
     set_serialized_data(from.serialized_data());
@@ -750,5 +753,7 @@ void Event::InternalSwap(Event* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace common
 
 // @@protoc_insertion_point(global_scope)

@@ -6,23 +6,35 @@
  */
 
 #include "Store.h"
+#include <sstream>
+#include <cassert>
+#include <iomanip>
 
 namespace event {
-
 
 using grpc::ServerContext;
 using grpc::Status;
 using grpc::ServerWriter;
 
+
+using namespace std;
 using namespace common;
 
-Store::Store() {
-	// TODO Auto-generated constructor stub
+Store::Store() : m_context(redisConnect("127.0.0.1", 6379)){
+	assert(m_context != nullptr);
+	assert(!m_context->err);
+}
 
+Store::~Store(){
+	redisFree(m_context);
 }
 
 void Store::on_receive(const char * msg) {
-	// TODO save the data
+	Event event{};
+	if (event.ParseFromString(string{msg})){
+		event.aggregate_id();
+		event.serialized_data();
+	}
 }
 
 Status Store::get_events(ServerContext* context, const Uuid* request, ServerWriter<Event>* writer)
@@ -30,5 +42,28 @@ Status Store::get_events(ServerContext* context, const Uuid* request, ServerWrit
 	return Status::OK;
 }
 
+void Store::add_event(Event & evt)
+{
+	redisCommand(m_context, "SET key:%s %s", to_str(evt.aggregate_id()).c_str(), evt.serialized_data().c_str());
+
+}
+
+
+auto convert_to_hex = [] (stringstream & stream, int64_t l) { stream << setfill('0') << setw(16) << hex << l; };
+
+
+string Store::to_str(const Uuid & uuid)
+{
+	// 8-4-4-4-12
+	stringstream stream;
+	convert_to_hex(stream, uuid.most_significant_bits());
+	convert_to_hex(stream, uuid.least_significant_bits());
+	string result( stream.str() );
+	for (int i=0; i<4; i++)
+	{
+		result.insert(8 + (i * 4) + i, 1, '-');
+	}
+	return result;
+}
 
 }

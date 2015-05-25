@@ -12,15 +12,21 @@ public:
 		virtual ~Listener() = default;
 	};
 
+
 	EventBusSubscriber(const char * url, Listener * listener);
 	virtual ~EventBusSubscriber();
+
+	/**
+	 * listening in a loop until object is destroyed
+	 * */
+	void listen();
+
 private:
 	const char * m_url;
 	zmq::context_t m_context;
 	zmq::socket_t m_subscriber;
 	Listener * m_listener;
 
-	void listen();
 };
 
 }

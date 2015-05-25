@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <thread>
 
 #include <grpc/grpc.h>
 
@@ -31,18 +32,17 @@ int main(int argc, char** argv)
 	const string subs_url = get_url(BASE_URL_SUB, get_port(argc, argv, 1));
 	const string reqs_url = get_url(BASE_URL_REQ, get_port(argc, argv, 2));
 
-	cout << "listening sub: " << subs_url << endl;
-	cout << "listening req: " << reqs_url << endl;
-
 	Store store{};
 	EventBusSubscriber subscriber{subs_url.c_str(), &store};
+	thread th_subscriber {&EventBusSubscriber::listen, &subscriber};
+	cout << "listening sub: " << subs_url << endl;
 
 	grpc_init();
-
 	EventStoreImpl event_store_service {};
 	ServerRunner server_runner{reqs_url , {&event_store_service}};
-
 	grpc_shutdown();
+
+	th_subscriber.join();
 
 	return 0;
 }

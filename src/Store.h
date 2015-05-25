@@ -8,20 +8,21 @@
 #ifndef STORE_H_
 #define STORE_H_
 
+#include "event_store.grpc.pb.h"
 #include "EventBusSubscriber.h"
 #include <vector>
 
 namespace event {
 
-class Store : public EventBusSubscriber::Listener{
+class Store final:
+	public EventBusSubscriber::Listener,
+	public EventStore::Service {
 public:
-	Store();
+	explicit Store();
 	virtual ~Store() = default;
 
-	virtual void on_receive(const char * msg) ;
-
-	// TODO use Uuid class
-	virtual std::vector<const char *>  get_events(const char * uuid);
+	void on_receive(const char * msg) override;
+	grpc::Status get_events(grpc::ServerContext* context, const common::Uuid* request, grpc::ServerWriter<common::Event>* writer) override;
 
 };
 

@@ -9,6 +9,13 @@
 
 namespace event {
 
+
+using grpc::ServerContext;
+using grpc::Status;
+using grpc::ServerWriter;
+
+using namespace common;
+
 Store::Store() {
 	// TODO Auto-generated constructor stub
 
@@ -18,9 +25,10 @@ void Store::on_receive(const char * msg) {
 	// TODO save the data
 }
 
-// TODO use Uuid class
-std::vector<const char *> Store::get_events(const char * uuid){
-	return {"aa", "bb"};
+Status Store::get_events(ServerContext* context, const Uuid* request, ServerWriter<Event>* writer)
+{
+	return Status::OK;
 }
+
 
 }

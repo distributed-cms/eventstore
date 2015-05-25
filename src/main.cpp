@@ -7,7 +7,6 @@
 
 #include "Store.h"
 #include "ServerRunner.h"
-#include "EventStoreImpl.h"
 
 using namespace std;
 using namespace event;
@@ -38,8 +37,8 @@ int main(int argc, char** argv)
 	cout << "listening sub: " << subs_url << endl;
 
 	grpc_init();
-	EventStoreImpl event_store_service {};
-	ServerRunner server_runner{reqs_url , {&event_store_service}};
+	//EventStoreImpl event_store_service {};
+	ServerRunner server_runner{reqs_url , {&store}};
 	grpc_shutdown();
 
 	th_subscriber.join();

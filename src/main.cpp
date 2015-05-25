@@ -12,28 +12,35 @@ using namespace std;
 using namespace event;
 using namespace common;
 
-constexpr int DEFAULT_PORT = 10001;
+constexpr int BASE_PORT = 60000;
+const char * BASE_URL_SUB = "tcp://localhost:";
+const char * BASE_URL_REQ = "0.0.0.0:";
 
-int get_port (int argc, char ** argv)
-{
-	return argc > 1 ? stoi(argv[1]) : DEFAULT_PORT;
+
+int get_port(int argc, char ** argv, int port_position) {
+	return argc > port_position ?
+			atoi(argv[port_position]) : BASE_PORT + port_position;
 }
 
-string get_address(int argc, char ** argv)
-{
-	// TODO we can  set the host as configurable as parameter
-	return string{"0.0.0.0:"} + to_string(get_port(argc, argv));
+string get_url(const char * base_url, unsigned port) {
+	return base_url + to_string(port);
 }
 
 int main(int argc, char** argv)
 {
+	const string subs_url = get_url(BASE_URL_SUB, get_port(argc, argv, 1));
+	const string reqs_url = get_url(BASE_URL_REQ, get_port(argc, argv, 2));
+
+	cout << "listening sub: " << subs_url << endl;
+	cout << "listening req: " << reqs_url << endl;
+
 	Store store{};
-	EventBusSubscriber subscriber{"tcp://localhost:55551", &store};
-	const string address = get_address(argc, argv);
+	EventBusSubscriber subscriber{subs_url.c_str(), &store};
 
 	grpc_init();
+
 	EventStoreImpl event_store_service {};
-	ServerRunner server_runner{get_address(argc, argv) , {&event_store_service}};
+	ServerRunner server_runner{reqs_url , {&event_store_service}};
 
 	grpc_shutdown();
 

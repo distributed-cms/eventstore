@@ -7,10 +7,14 @@
 namespace event {
 
 EventBusSubscriber::EventBusSubscriber(const char * url, Listener * listener) :
-		m_url(url), m_context(0), m_subscriber(m_context, ZMQ_SUB), m_listener(listener){
+		m_url(url), m_context(1), m_subscriber(m_context, ZMQ_SUB), m_listener(listener){
+	std::cout << "initializing subscriber at " << m_url << std::endl;
 	m_subscriber.setsockopt(ZMQ_SUBSCRIBE, "", 0);
+	std::cout << "setting subscription filter" << std::endl;
 	m_subscriber.connect(m_url);
+	std::cout << "connected" << std::endl;
 	listen();
+	std::cout << "listening" << std::endl;
 }
 
 EventBusSubscriber::~EventBusSubscriber(){

@@ -4,9 +4,11 @@
 
 #include <grpc/grpc.h>
 
-#include "EventBusSubscriber.h"
+//#include "EventBusSubscriber.h"
+#include "Store.h"
 
 using namespace std;
+using namespace event;
 
 constexpr int DEFAULT_PORT = 10001;
 
@@ -23,7 +25,8 @@ string get_address(int argc, char ** argv)
 
 int main(int argc, char** argv)
 {
-	EventBusSubscriber subscriber;
+	Store store{};
+	EventBusSubscriber subscriber{"tcp://localhost:55551", &store};
 	const string address = get_address(argc, argv);
 
 	grpc_init();

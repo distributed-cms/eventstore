@@ -44,7 +44,12 @@ Status Store::get_events(ServerContext* context, const Uuid* request, ServerWrit
 
 void Store::add_event(Event & evt)
 {
-	redisCommand(m_context, "SET key:%s %s", to_str(evt.aggregate_id()).c_str(), evt.serialized_data().c_str());
+	//redisReply * reply = redisCommand(m_context, "SET key:%s %s", to_str(evt.aggregate_id()).c_str(), evt.serialized_data().c_str());
+
+	redisReply * reply = redisCommand(m_context, "RPUSH key:%s %s", to_str(evt.aggregate_id()).c_str(), evt.serialized_data().c_str());
+
+	cout << reply->str << endl;
+    freeReplyObject(reply);
 
 }
 

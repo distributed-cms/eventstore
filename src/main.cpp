@@ -31,9 +31,17 @@ int main(int argc, char** argv)
 	const string subs_url = get_url(BASE_URL_SUB, get_port(argc, argv, 1));
 	const string reqs_url = get_url(BASE_URL_REQ, get_port(argc, argv, 2));
 
+	Event event{};
+	Uuid id{};
+	id.set_least_significant_bits(time(0));
+	id.set_most_significant_bits(time(0)+1);
+	event.set_allocated_aggregate_id(&id);
+	event.set_serialized_data("data");
+
 	Store store{};
 	EventBusSubscriber subscriber{subs_url.c_str(), &store};
 	thread th_subscriber {&EventBusSubscriber::listen, &subscriber};
+	store.add_event(event);
 	cout << "listening sub: " << subs_url << endl;
 
 	grpc_init();

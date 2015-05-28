@@ -6,6 +6,7 @@
  */
 
 #include "Store.h"
+#include <iostream>
 #include <sstream>
 #include <cassert>
 #include <iomanip>
@@ -47,8 +48,17 @@ void Store::add_event(Event & evt)
 	//redisReply * reply = redisCommand(m_context, "SET key:%s %s", to_str(evt.aggregate_id()).c_str(), evt.serialized_data().c_str());
 	//redisReply * reply = redisCommand(m_context, "RPUSH key:%s %s", to_str(evt.aggregate_id()).c_str(), evt.serialized_data().c_str());
 
-	redisReply * reply = redisCommand(m_context, "ZADD key:%s %d %s", to_str(evt.aggregate_id()).c_str(), time(0), evt.serialized_data().c_str());
-	cout << reply->str << endl;
+	const Uuid & id = evt.aggregate_id();
+	string id_str = to_str(id);
+	cout << "saving " << id_str  << endl;
+	redisReply * reply = static_cast<redisReply *>(redisCommand(m_context, "ZADD %s %d %s", id_str.c_str(), time(0), evt.serialized_data().c_str()));
+	if (m_context->err)
+	{
+		cerr  << m_context->errstr << endl;
+	}else
+	{
+		cout << reply->type << endl;
+	}
     freeReplyObject(reply);
 
 }

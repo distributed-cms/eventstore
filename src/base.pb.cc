@@ -182,7 +182,7 @@ const int Uuid::kMostSignificantBitsFieldNumber;
 #endif  // !_MSC_VER
 
 Uuid::Uuid()
-  : ::google::protobuf::Message() , _internal_metadata_(NULL)  {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:common.Uuid)
 }
@@ -256,19 +256,17 @@ Uuid* Uuid::New(::google::protobuf::Arena* arena) const {
 }
 
 void Uuid::Clear() {
-#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<Uuid*>(16)->f) - \
-   reinterpret_cast<char*>(16))
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<Uuid*>(16)->f)
 
-#define ZR_(first, last) do {                              \
-    size_t f = OFFSET_OF_FIELD_(first);                    \
-    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
-    ::memset(&first, 0, n);                                \
-  } while (0)
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
 
   ZR_(least_significant_bits_, most_significant_bits_);
 
-#undef OFFSET_OF_FIELD_
+#undef ZR_HELPER_
 #undef ZR_
 
 }
@@ -391,9 +389,9 @@ int Uuid::ByteSize() const {
 
 void Uuid::MergeFrom(const ::google::protobuf::Message& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  const Uuid* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Uuid*>(
-      &from);
+  const Uuid* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Uuid>(
+          &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
@@ -459,16 +457,95 @@ void Uuid::InternalSwap(Uuid* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// Uuid
+
+// optional sint64 least_significant_bits = 1;
+void Uuid::clear_least_significant_bits() {
+  least_significant_bits_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 Uuid::least_significant_bits() const {
+  // @@protoc_insertion_point(field_get:common.Uuid.least_significant_bits)
+  return least_significant_bits_;
+}
+ void Uuid::set_least_significant_bits(::google::protobuf::int64 value) {
+  
+  least_significant_bits_ = value;
+  // @@protoc_insertion_point(field_set:common.Uuid.least_significant_bits)
+}
+
+// optional sint64 most_significant_bits = 2;
+void Uuid::clear_most_significant_bits() {
+  most_significant_bits_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 Uuid::most_significant_bits() const {
+  // @@protoc_insertion_point(field_get:common.Uuid.most_significant_bits)
+  return most_significant_bits_;
+}
+ void Uuid::set_most_significant_bits(::google::protobuf::int64 value) {
+  
+  most_significant_bits_ = value;
+  // @@protoc_insertion_point(field_set:common.Uuid.most_significant_bits)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
+void Event::_slow_mutable_aggregate_id() {
+  aggregate_id_ = ::google::protobuf::Arena::CreateMessage< ::common::Uuid >(
+        GetArenaNoVirtual());
+}
+::common::Uuid* Event::_slow_release_aggregate_id() {
+  if (aggregate_id_ == NULL) {
+    return NULL;
+  } else {
+    ::common::Uuid* temp = new ::common::Uuid;
+    temp->MergeFrom(*aggregate_id_);
+    aggregate_id_ = NULL;
+    return temp;
+  }
+}
+::common::Uuid* Event::unsafe_arena_release_aggregate_id() {
+  
+  ::common::Uuid* temp = aggregate_id_;
+  aggregate_id_ = NULL;
+  return temp;
+}
+void Event::_slow_set_allocated_aggregate_id(
+    ::google::protobuf::Arena* message_arena, ::common::Uuid** aggregate_id) {
+    if (message_arena != NULL && 
+        ::google::protobuf::Arena::GetArena(*aggregate_id) == NULL) {
+      message_arena->Own(*aggregate_id);
+    } else if (message_arena !=
+               ::google::protobuf::Arena::GetArena(*aggregate_id)) {
+      ::common::Uuid* new_aggregate_id = 
+            ::google::protobuf::Arena::CreateMessage< ::common::Uuid >(
+            message_arena);
+      new_aggregate_id->CopyFrom(**aggregate_id);
+      *aggregate_id = new_aggregate_id;
+    }
+}
+void Event::unsafe_arena_set_allocated_aggregate_id(
+    ::common::Uuid* aggregate_id) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete aggregate_id_;
+  }
+  aggregate_id_ = aggregate_id;
+  if (aggregate_id) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:common.Event.aggregate_id)
+}
 #ifndef _MSC_VER
 const int Event::kAggregateIdFieldNumber;
 const int Event::kSerializedDataFieldNumber;
 #endif  // !_MSC_VER
 
 Event::Event()
-  : ::google::protobuf::Message() , _internal_metadata_(NULL)  {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:common.Event)
 }
@@ -546,7 +623,7 @@ Event* Event::New(::google::protobuf::Arena* arena) const {
 }
 
 void Event::Clear() {
-  if (aggregate_id_ != NULL) delete aggregate_id_;
+  if (GetArenaNoVirtual() == NULL && aggregate_id_ != NULL) delete aggregate_id_;
   aggregate_id_ = NULL;
   serialized_data_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
@@ -683,9 +760,9 @@ int Event::ByteSize() const {
 
 void Event::MergeFrom(const ::google::protobuf::Message& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  const Event* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Event*>(
-      &from);
+  const Event* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Event>(
+          &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
@@ -751,6 +828,120 @@ void Event::InternalSwap(Event* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// Event
+
+// optional .common.Uuid aggregate_id = 1;
+bool Event::has_aggregate_id() const {
+  return !_is_default_instance_ && aggregate_id_ != NULL;
+}
+void Event::clear_aggregate_id() {
+  if (GetArenaNoVirtual() == NULL && aggregate_id_ != NULL) delete aggregate_id_;
+  aggregate_id_ = NULL;
+}
+ const ::common::Uuid& Event::aggregate_id() const {
+  // @@protoc_insertion_point(field_get:common.Event.aggregate_id)
+  return aggregate_id_ != NULL ? *aggregate_id_ : *default_instance_->aggregate_id_;
+}
+ ::common::Uuid* Event::mutable_aggregate_id() {
+  
+  if (aggregate_id_ == NULL) {
+    _slow_mutable_aggregate_id();  }
+  // @@protoc_insertion_point(field_mutable:common.Event.aggregate_id)
+  return aggregate_id_;
+}
+ ::common::Uuid* Event::release_aggregate_id() {
+  
+  if (GetArenaNoVirtual() != NULL) {
+    return _slow_release_aggregate_id();
+  } else {
+    ::common::Uuid* temp = aggregate_id_;
+    aggregate_id_ = NULL;
+    return temp;
+  }
+}
+ void Event::set_allocated_aggregate_id(::common::Uuid* aggregate_id) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete aggregate_id_;
+  }
+  if (aggregate_id != NULL) {
+    _slow_set_allocated_aggregate_id(message_arena, &aggregate_id);
+  }
+  aggregate_id_ = aggregate_id;
+  if (aggregate_id) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:common.Event.aggregate_id)
+}
+
+// optional string serialized_data = 2;
+void Event::clear_serialized_data() {
+  serialized_data_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+ const ::std::string& Event::serialized_data() const {
+  // @@protoc_insertion_point(field_get:common.Event.serialized_data)
+  return serialized_data_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void Event::set_serialized_data(const ::std::string& value) {
+  
+  serialized_data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set:common.Event.serialized_data)
+}
+ void Event::set_serialized_data(const char* value) {
+  
+  serialized_data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_char:common.Event.serialized_data)
+}
+ void Event::set_serialized_data(const char* value,
+    size_t size) {
+  
+  serialized_data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_pointer:common.Event.serialized_data)
+}
+ ::std::string* Event::mutable_serialized_data() {
+  
+  // @@protoc_insertion_point(field_mutable:common.Event.serialized_data)
+  return serialized_data_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+ ::std::string* Event::release_serialized_data() {
+  
+  return serialized_data_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+ ::std::string* Event::unsafe_arena_release_serialized_data() {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return serialized_data_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
+}
+ void Event::set_allocated_serialized_data(::std::string* serialized_data) {
+  if (serialized_data != NULL) {
+    
+  } else {
+    
+  }
+  serialized_data_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), serialized_data,
+      GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:common.Event.serialized_data)
+}
+ void Event::unsafe_arena_set_allocated_serialized_data(
+    ::std::string* serialized_data) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (serialized_data != NULL) {
+    
+  } else {
+    
+  }
+  serialized_data_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      serialized_data, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:common.Event.serialized_data)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

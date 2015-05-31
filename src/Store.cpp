@@ -40,7 +40,31 @@ void Store::on_receive(const char * msg) {
 
 Status Store::get_events(ServerContext* context, const Uuid* request, ServerWriter<Event>* writer)
 {
-	return Status::OK;
+	Status status = Status::OK;
+	string id_str = to_str(*request);
+	redisReply * reply = static_cast<redisReply *>(redisCommand(m_context, "GET %s", id_str));
+	if (reply == nullptr)
+	{
+		cerr  << m_context->errstr << endl;
+		status = Status::Cancelled;
+	}
+	else
+	{
+		if (reply->type == REDIS_REPLY_ARRAY)
+		{
+			for (unsigned i=0; i<reply->elements; i++)
+			{
+				cout << reply->element[i] << endl;
+			}
+
+		}else
+		{
+			cerr << "unexpected reply type " << reply->type << endl;
+			status = Status::Cancelled;
+		}
+		freeReplyObject(reply);
+	}
+	return status;
 }
 
 void Store::add_event(Event & evt)
@@ -52,14 +76,14 @@ void Store::add_event(Event & evt)
 	string id_str = to_str(id);
 	cout << "saving " << id_str  << endl;
 	redisReply * reply = static_cast<redisReply *>(redisCommand(m_context, "ZADD %s %d %s", id_str.c_str(), time(0), evt.serialized_data().c_str()));
-	if (m_context->err)
+	if (reply == nullptr)
 	{
 		cerr  << m_context->errstr << endl;
 	}else
 	{
 		cout << reply->type << endl;
+		freeReplyObject(reply);
 	}
-    freeReplyObject(reply);
 
 }
 

@@ -26,15 +26,15 @@ EventStore::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel
   : ::grpc::InternalStub(channel), rpcmethod_get_events_(EventStore_method_names[0], ::grpc::RpcMethod::SERVER_STREAMING, channel->RegisterMethod(EventStore_method_names[0]))
   {}
 
-std::unique_ptr< ::grpc::ClientReader< ::common::Event>> EventStore::Stub::get_events(::grpc::ClientContext* context, const ::common::Uuid& request) {
-  return std::unique_ptr< ::grpc::ClientReader< ::common::Event>>(new ::grpc::ClientReader< ::common::Event>(channel(),rpcmethod_get_events_, context, request));
+::grpc::ClientReader< ::common::Event>* EventStore::Stub::get_eventsRaw(::grpc::ClientContext* context, const ::common::Uuid& request) {
+  return new ::grpc::ClientReader< ::common::Event>(channel(), rpcmethod_get_events_, context, request);
 }
 
-std::unique_ptr< ::grpc::ClientAsyncReader< ::common::Event>> EventStore::Stub::Asyncget_events(::grpc::ClientContext* context, const ::common::Uuid& request, ::grpc::CompletionQueue* cq, void* tag) {
-  return std::unique_ptr< ::grpc::ClientAsyncReader< ::common::Event>>(new ::grpc::ClientAsyncReader< ::common::Event>(channel(), cq, rpcmethod_get_events_, context, request, tag));
+::grpc::ClientAsyncReader< ::common::Event>* EventStore::Stub::Asyncget_eventsRaw(::grpc::ClientContext* context, const ::common::Uuid& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return new ::grpc::ClientAsyncReader< ::common::Event>(channel(), cq, rpcmethod_get_events_, context, request, tag);
 }
 
-EventStore::AsyncService::AsyncService(::grpc::CompletionQueue* cq) : ::grpc::AsynchronousService(cq, EventStore_method_names, 1) {}
+EventStore::AsyncService::AsyncService() : ::grpc::AsynchronousService(EventStore_method_names, 1) {}
 
 EventStore::Service::~Service() {
   delete service_;
@@ -44,8 +44,8 @@ EventStore::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED);
 }
 
-void EventStore::AsyncService::Requestget_events(::grpc::ServerContext* context, ::common::Uuid* request, ::grpc::ServerAsyncWriter< ::common::Event>* writer, ::grpc::CompletionQueue* cq, void* tag) {
-  AsynchronousService::RequestServerStreaming(0, context, request, writer, cq, tag);
+void EventStore::AsyncService::Requestget_events(::grpc::ServerContext* context, ::common::Uuid* request, ::grpc::ServerAsyncWriter< ::common::Event>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+  AsynchronousService::RequestServerStreaming(0, context, request, writer, new_call_cq, notification_cq, tag);
 }
 
 ::grpc::RpcService* EventStore::Service::service() {

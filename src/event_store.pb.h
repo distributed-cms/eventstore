@@ -44,19 +44,12 @@ void protobuf_ShutdownFile_event_5fstore_2eproto();
 
 // ===================================================================
 
+#if !PROTOBUF_INLINE_NOT_IN_HEADERS
+#endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace event
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-
-}  // namespace protobuf
-}  // namespace google
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

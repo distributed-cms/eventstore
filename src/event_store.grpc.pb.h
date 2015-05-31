@@ -9,29 +9,48 @@
 #include <grpc++/impl/internal_stub.h>
 #include <grpc++/impl/rpc_method.h>
 #include <grpc++/impl/service_type.h>
+#include <grpc++/async_unary_call.h>
 #include <grpc++/status.h>
+#include <grpc++/stream.h>
 
 namespace grpc {
 class CompletionQueue;
 class ChannelInterface;
 class RpcService;
+class ServerCompletionQueue;
 class ServerContext;
-template <class InMessage> class ClientReader;
-template <class OutMessage> class ServerWriter;
-template <class OutMessage> class ClientAsyncReader;
-template <class InMessage> class ServerAsyncWriter;
 }  // namespace grpc
 
 namespace event {
 
 class EventStore GRPC_FINAL {
  public:
-  class Stub GRPC_FINAL : public ::grpc::InternalStub {
+  class StubInterface {
+   public:
+    virtual ~StubInterface() {}
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::common::Event>> get_events(::grpc::ClientContext* context, const ::common::Uuid& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::common::Event>>(get_eventsRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::common::Event>> Asyncget_events(::grpc::ClientContext* context, const ::common::Uuid& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::common::Event>>(Asyncget_eventsRaw(context, request, cq, tag));
+    }
+  private:
+    virtual ::grpc::ClientReaderInterface< ::common::Event>* get_eventsRaw(::grpc::ClientContext* context, const ::common::Uuid& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::common::Event>* Asyncget_eventsRaw(::grpc::ClientContext* context, const ::common::Uuid& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+  };
+  class Stub GRPC_FINAL : public StubInterface, public ::grpc::InternalStub {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    std::unique_ptr< ::grpc::ClientReader< ::common::Event>> get_events(::grpc::ClientContext* context, const ::common::Uuid& request);
-    std::unique_ptr< ::grpc::ClientAsyncReader< ::common::Event>> Asyncget_events(::grpc::ClientContext* context, const ::common::Uuid& request, ::grpc::CompletionQueue* cq, void* tag);
+    std::unique_ptr< ::grpc::ClientReader< ::common::Event>> get_events(::grpc::ClientContext* context, const ::common::Uuid& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::common::Event>>(get_eventsRaw(context, request));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::common::Event>> Asyncget_events(::grpc::ClientContext* context, const ::common::Uuid& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::common::Event>>(Asyncget_eventsRaw(context, request, cq, tag));
+    }
+
    private:
+    ::grpc::ClientReader< ::common::Event>* get_eventsRaw(::grpc::ClientContext* context, const ::common::Uuid& request) GRPC_OVERRIDE;
+    ::grpc::ClientAsyncReader< ::common::Event>* Asyncget_eventsRaw(::grpc::ClientContext* context, const ::common::Uuid& request, ::grpc::CompletionQueue* cq, void* tag) GRPC_OVERRIDE;
     const ::grpc::RpcMethod rpcmethod_get_events_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
@@ -47,9 +66,9 @@ class EventStore GRPC_FINAL {
   };
   class AsyncService GRPC_FINAL : public ::grpc::AsynchronousService {
    public:
-    explicit AsyncService(::grpc::CompletionQueue* cq);
+    explicit AsyncService();
     ~AsyncService() {};
-    void Requestget_events(::grpc::ServerContext* context, ::common::Uuid* request, ::grpc::ServerAsyncWriter< ::common::Event>* writer, ::grpc::CompletionQueue* cq, void *tag);
+    void Requestget_events(::grpc::ServerContext* context, ::common::Uuid* request, ::grpc::ServerAsyncWriter< ::common::Event>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag);
   };
 };
 

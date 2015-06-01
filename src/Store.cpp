@@ -84,7 +84,6 @@ void Store::add_event(Event & evt)
 		cout << reply->type << endl;
 		freeReplyObject(reply);
 	}
-
 }
 
 

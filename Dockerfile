@@ -34,11 +34,12 @@ RUN cd /var/local/git/grpc && make install
 #Install event store
 
 RUN git clone https://github.com/carlosvin/eventstore.git
+WORKDIR /eventstore
 RUN git pull
-RUN mkdir /eventstore/bin
+RUN mkdir bin
 WORKDIR /eventstore/bin
 RUN meson ../src .
-RUN ninja-build
+RUN ninja
 
 ENV port_sub 50001
 ENV port_req 50002

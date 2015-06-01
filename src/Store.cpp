@@ -35,7 +35,8 @@ Store::~Store(){
 
 void Store::on_receive(const char * msg) {
 	Event event{};
-	if (event.ParseFromString(string{msg})){
+	const string msg_str = msg;
+	if (event.ParseFromString(msg_str)){
 		event.aggregate_id();
 		event.serialized_data();
 	}

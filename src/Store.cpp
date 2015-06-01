@@ -46,7 +46,7 @@ Status Store::get_events(ServerContext* context, const Uuid* request, ServerWrit
 {
 	Status status = Status::OK;
 	string id_str = to_str(*request);
-	redisReply * reply = static_cast<redisReply *>(redisCommand(m_context, FMT_RANGE, id_str));
+	redisReply * reply = static_cast<redisReply *>(redisCommand(m_context, FMT_RANGE, id_str.c_str()));
 	if (reply == nullptr)
 	{
 		cerr  << m_context->errstr << endl;

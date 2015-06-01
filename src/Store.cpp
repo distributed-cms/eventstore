@@ -21,6 +21,9 @@ using grpc::ServerWriter;
 using namespace std;
 using namespace common;
 
+const char * Store::FMT_RANGE = "ZRANGE %s 0 -1";
+const char * Store::FMT_ADD = "ZADD %s %d %s";
+
 Store::Store() : m_context(redisConnect("127.0.0.1", 6379)){
 	assert(m_context != nullptr);
 	assert(!m_context->err);
@@ -42,7 +45,7 @@ Status Store::get_events(ServerContext* context, const Uuid* request, ServerWrit
 {
 	Status status = Status::OK;
 	string id_str = to_str(*request);
-	redisReply * reply = static_cast<redisReply *>(redisCommand(m_context, "GET %s", id_str));
+	redisReply * reply = static_cast<redisReply *>(redisCommand(m_context, FMT_RANGE, id_str));
 	if (reply == nullptr)
 	{
 		cerr  << m_context->errstr << endl;
@@ -69,13 +72,10 @@ Status Store::get_events(ServerContext* context, const Uuid* request, ServerWrit
 
 void Store::add_event(Event & evt)
 {
-	//redisReply * reply = redisCommand(m_context, "SET key:%s %s", to_str(evt.aggregate_id()).c_str(), evt.serialized_data().c_str());
-	//redisReply * reply = redisCommand(m_context, "RPUSH key:%s %s", to_str(evt.aggregate_id()).c_str(), evt.serialized_data().c_str());
-
 	const Uuid & id = evt.aggregate_id();
 	string id_str = to_str(id);
 	cout << "saving " << id_str  << endl;
-	redisReply * reply = static_cast<redisReply *>(redisCommand(m_context, "ZADD %s %d %s", id_str.c_str(), time(0), evt.serialized_data().c_str()));
+	redisReply * reply = static_cast<redisReply *>(redisCommand(m_context, FMT_ADD, id_str.c_str(), time(0), evt.serialized_data().c_str()));
 	if (reply == nullptr)
 	{
 		cerr  << m_context->errstr << endl;

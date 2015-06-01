@@ -19,6 +19,9 @@ class Store final:
 	public EventBusSubscriber::Listener,
 	public EventStore::Service {
 public:
+	static const char * FMT_RANGE;
+	static const char * FMT_ADD;
+
 	explicit Store();
 	virtual ~Store();
 

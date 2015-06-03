@@ -25,8 +25,10 @@ const char * Store::FMT_RANGE = "ZRANGE %s 0 -1";
 const char * Store::FMT_ADD = "ZADD %s %d %s";
 
 Store::Store(const char * redis_ip) : m_context(redisConnect(redis_ip, 6379)){
+	cout << "connecting to redis: " <<  redis_ip << "... "<< flush;
 	assert(m_context != nullptr);
 	assert(!m_context->err);
+	cout << "OK" << endl;
 }
 
 Store::~Store(){

@@ -1,0 +1,4 @@
+sudo docker run --name redis-eventstore -d redis redis-server --appendonly yes
+
+sudo docker build -t carlosvin/eventstore .
+sudo docker run --name eventstore -d carlosvin/eventstore

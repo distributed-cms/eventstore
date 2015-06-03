@@ -18,7 +18,6 @@ RUN apt-get update && apt-get install -y \
   libzmq3-dev \
   libhiredis-dev \
   meson \
-  redis \
   unzip && apt-get clean
 
 RUN git clone https://github.com/grpc/grpc.git /var/local/git/grpc

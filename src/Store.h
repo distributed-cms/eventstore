@@ -22,7 +22,7 @@ public:
 	static const char * FMT_RANGE;
 	static const char * FMT_ADD;
 
-	explicit Store();
+	explicit Store(const char * redis_ip);
 	virtual ~Store();
 
 	void add_event(common::Event & evt);

@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
   libzmq3-dev \
   libhiredis-dev \
   meson \
+  redis \
   unzip && apt-get clean
 
 RUN git clone https://github.com/grpc/grpc.git /var/local/git/grpc
@@ -34,17 +35,16 @@ RUN cd /var/local/git/grpc && make install
 #Install event store
 
 RUN git clone https://github.com/carlosvin/eventstore.git
-WORKDIR /eventstore
-RUN git pull
-RUN mkdir bin
+RUN mkdir /eventstore/bin
 WORKDIR /eventstore/bin
 RUN meson ../src .
 RUN ninja
 
 ENV port_sub 50001
 ENV port_req 50002
+ENV redis_ip 172.17.0.44
 
 EXPOSE $port_sub
 EXPOSE $port_req
-
-ENTRYPOINT ./content_server $port_sub $port_req
+ 
+ENTRYPOINT ./eventstore $port_sub $port_req $redis_ip

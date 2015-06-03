@@ -38,7 +38,7 @@ int main(int argc, char** argv)
 	event.set_allocated_aggregate_id(&id);
 	event.set_serialized_data("data");
 
-	Store store{};
+	Store store{argv[3]};
 	EventBusSubscriber subscriber{subs_url.c_str(), &store};
 	thread th_subscriber {&EventBusSubscriber::listen, &subscriber};
 	store.add_event(event);

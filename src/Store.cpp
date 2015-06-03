@@ -24,7 +24,7 @@ using namespace common;
 const char * Store::FMT_RANGE = "ZRANGE %s 0 -1";
 const char * Store::FMT_ADD = "ZADD %s %d %s";
 
-Store::Store() : m_context(redisConnect("127.0.0.1", 6379)){
+Store::Store(const char * redis_ip) : m_context(redisConnect(redis_ip, 6379)){
 	assert(m_context != nullptr);
 	assert(!m_context->err);
 }

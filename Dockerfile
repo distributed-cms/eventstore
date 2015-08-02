@@ -33,17 +33,16 @@ RUN cd /var/local/git/grpc && make install
 
 #Install event store
 
-RUN git clone https://github.com/carlosvin/eventstore.git
+RUN git clone https://github.com/distributed-cms/eventstore.git
 RUN mkdir /eventstore/bin
 WORKDIR /eventstore/bin
 RUN meson ../src .
 RUN ninja
 
-ENV port_sub 50001
-ENV port_req 50002
-ENV redis_ip 172.17.0.44
+ENV PORT_SUB 5001
+ENV PORT_REQ 5002
 
-EXPOSE $port_sub
-EXPOSE $port_req
- 
-ENTRYPOINT ./eventstore $port_sub $port_req $redis_ip
+EXPOSE $PORT_SUB
+EXPOSE $PORT_REQ
+
+ENTRYPOINT ./eventstore $PORT_SUB $PORT_REQ $REDIS_IP

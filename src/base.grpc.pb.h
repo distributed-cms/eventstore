@@ -8,6 +8,7 @@
 
 #include <grpc++/impl/internal_stub.h>
 #include <grpc++/impl/rpc_method.h>
+#include <grpc++/impl/proto_utils.h>
 #include <grpc++/impl/service_type.h>
 #include <grpc++/async_unary_call.h>
 #include <grpc++/status.h>

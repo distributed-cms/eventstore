@@ -52,7 +52,7 @@ Status Store::get_events(ServerContext* context, const Uuid* request, ServerWrit
 	if (reply == nullptr)
 	{
 		cerr  << m_context->errstr << endl;
-		status = Status::Cancelled;
+		status = Status::CANCELLED;
 	}
 	else
 	{
@@ -66,7 +66,7 @@ Status Store::get_events(ServerContext* context, const Uuid* request, ServerWrit
 		}else
 		{
 			cerr << "unexpected reply type " << reply->type << endl;
-			status = Status::Cancelled;
+			status = Status::CANCELLED;
 		}
 		freeReplyObject(reply);
 	}

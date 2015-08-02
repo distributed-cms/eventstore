@@ -8,7 +8,7 @@
 #ifndef STORE_H_
 #define STORE_H_
 
-#include "event_store.grpc.pb.h"
+#include "eventstore.grpc.pb.h"
 #include "EventBusSubscriber.h"
 #include <vector>
 #include <hiredis/hiredis.h>
